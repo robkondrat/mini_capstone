@@ -1,8 +1,6 @@
 class Api::ProductsController < ApplicationController
   def all_games_action
-    @product = Product.all.each do |game|
-      game
-    end
+    @products = Product.all
     render "all_games_view.json.jb"
   end
 
