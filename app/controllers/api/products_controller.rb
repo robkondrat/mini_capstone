@@ -1,37 +1,12 @@
 class Api::ProductsController < ApplicationController
-  def all_games_action
+  def index
     @products = Product.all
-    render "all_games_view.json.jb"
+    render "index.json.jb"
   end
 
-  def cod_action
-    @product = Product.first
-    render "cod_view.json.jb"
-  end
-
-  def forza_action
-    @product = Product.second
-    render "forza_view.json.jb"
-  end
-
-  def smash_action
-    @product = Product.third
-    render "smash_view.json.jb"
-  end
-
-  def doom_action
-    @product = Product.fourth
-    render "doom_view.json.jb"
-  end
-
-  def party_action
-    @product = Product.fifth
-    render "party_view.json.jb"
-  end
-
-  def gta_action
-    @product = Product.last
-    render "gta_view.json.jb"
+  def show
+    @product = Product.find(params[:id])
+    render "show.json.jb"
   end
 
 end
