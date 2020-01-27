@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :supplier
-  # has_many :images
+  has_many :images
 
   # def supplier
   #   Supplier.find_by(id: self.supplier_id)
@@ -12,7 +12,7 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :price, numericality: { greater_than: 0, less_than: 10000.00 }
   validates :description, length: { in: 10..500 }
-  validates :image_url, length: { maximum: 255 }
+
 
 
   def is_discounted?
