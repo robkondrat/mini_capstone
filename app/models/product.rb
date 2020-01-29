@@ -25,7 +25,7 @@ class Product < ApplicationRecord
   end
 
   def total
-    price + tax
+    subtotal + tax
   end
 
 end
