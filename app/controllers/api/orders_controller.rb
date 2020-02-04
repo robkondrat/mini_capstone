@@ -1,29 +1,16 @@
 class Api::OrdersController < ApplicationController
+  before_action :authenticate_user, only: [:index, :create]
 
   def index
-    if current_user
-      @orders = current_user.orders
-      render "index.json.jb"
-    else
-      render json: {message: "Current user not authorized"}
-    end
-
+    @orders = current_user.orders
+    render "index.json.jb"
   end
 
   def create
-    @order = Order.new(
-                        user_id: current_user.id,
-                        product_id: params[:product_id],
-                        quantity: params[:quantity]
-                        )
-
+    @order = Order.new(user_id: current_user.id)
     @order.calculate_totals
-
-    if @order.save
-      render "show.json.jb"
-    else
-      render json: {errors: @order.errors.full_messages}, status: :unprocessable_entity
-    end
+    @order.save
+    render 'show.json.jb'
   end
 
   def show

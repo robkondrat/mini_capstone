@@ -1,11 +1,11 @@
 class Product < ApplicationRecord
   belongs_to :supplier
   has_many :images
-  has_many :orders
-
-  # def supplier
-  #   Supplier.find_by(id: self.supplier_id)
-  # end
+  has_many :carted_products
+  has_many :orders, through: :carted_products
+  
+  has_many :product_categories
+  has_many :categories, through: :product_categories
 
   validates :name, presence: true
   validates :name, uniqueness: true
@@ -25,7 +25,7 @@ class Product < ApplicationRecord
   end
 
   def total
-    subtotal + tax
+    price + tax
   end
 
 end

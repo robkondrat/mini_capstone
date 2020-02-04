@@ -4,6 +4,7 @@
   price: product.price,
   tax: product.tax,
   is_discounted: product.is_discounted?,
+  categories: product.categories.map {|category| category.name },
   total: product.total,
   description: product.description, 
   in_stock: product.in_stock,
